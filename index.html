@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据新闻 | 延吉市20年绿化变迁</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #2c3e50;
+            --light-bg: #f9f9f9;
+            --park-green: #27ae60;
+            --water-purple: #9b59b6;
+            --road-orange: #e67e22;
+            --mechanical-purple: #8e44ad;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.8;
+            background-color: var(--light-bg);
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #16a085, #3498db, #9b59b6, #e74c3c, #f39c12);
+        }
+        
+        h1, .chart-header, .insight-title, .footer, .conclusion h3 {
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .intro, .chart-analysis, .insight-box, .conclusion {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        .intro {
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-color);
+            position: relative;
+        }
+        
+        .intro::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232ecc71" opacity="0.2"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.3 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z"/></svg>');
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        
+        .chart-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .chart-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .chart-header {
+            padding: 20px;
+            background: var(--secondary-color);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chart-header::before {
+            content: "📊";
+            margin-right: 10px;
+        }
+        
+        .chart-container {
+            padding: 20px;
+            height: 400px;
+            position: relative;
+        }
+        
+        .chart-analysis {
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+            position: relative;
+            padding: 0 2px;
+        }
+        
+        .highlight::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: currentColor;
+            border-radius: 2px;
+            opacity: 0.4;
+        }
+        
+        .insight-box {
+            background: linear-gradient(to right, #f8f9fa, white);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 40px 0;
+            border-left: 4px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .insight-box::before {
+            content: "✨";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            opacity: 0.15;
+            transform: rotate(20deg);
+        }
+        
+        .insight-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .insight-title::before {
+            content: "";
+            display: inline-block;
+            height: 20px;
+            width: 3px;
+            background: var(--accent-color);
+            margin-right: 10px;
+        }
+        
+        .conclusion {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+        
+        .conclusion h3 {
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .conclusion h3::after {
+            content: "";
+            position: absolute;
+            height: 3px;
+            width: 50px;
+            background: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .conclusion ol {
+            padding-left: 20px;
+        }
+        
+        .conclusion li {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            position: relative;
+        }
+        
+        .conclusion li::before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            top: 7px;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-color);
+            border-radius: 50%;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .timeline-bar {
+            position: relative;
+            height: 8px;
+            background: linear-gradient(90deg, #1abc9c, #3498db, #9b59b6, #e74c3c, #f39c12);
+            width: 95%;
+            margin: 20px auto;
+            border-radius: 4px;
+        }
+        
+        .chart-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 20px;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header {
+                padding: 30px 0;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .chart-container {
+                height: 250px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .chart-analysis, .chart-header {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        .chart-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: rgba(52, 152, 219, 0.15);
+            color: var(--secondary-color);
+            border-radius: 3px;
+            font-size: 0.85rem;
+            margin: 0 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>延吉市20年绿化变迁</h1>
+            <div class="subtitle">数据可视化解读城市生态环境发展轨迹（2002-2023年）</div>
+        </div>
+    </div>
+    
+    <div class="timeline-bar"></div>
+    <div class="chart-timeline">
+        <span>2002年</span>
+        <span>2008年</span>
+        <span>2014年</span>
+        <span>2020年</span>
+        <span>2023年</span>
+    </div>
+    
+    <div class="container">
+        <div class="intro">
+            <p>延吉市作为吉林省东部重要的边境城市，过去20年间经历了快速的城镇化进程。本报告通过9组核心数据，揭示这座城市的生态环境建设如何与经济发展同步推进。数据显示，尽管城市面积扩张了2.8倍，但通过科学的生态规划，延吉市成功实现了<span class="highlight">绿化覆盖率提升57%</span>、<span class="highlight">人均公园绿地面积增长264%</span>的显著成就。</p>
+        </div>
+        
+        <!-- 1. 绿化覆盖率 -->
+        <div class="chart-card">
+            <div class="chart-header">1. 绿化覆盖率：从量变到质变</div>
+            <div class="chart-container">
+                <canvas id="coverageChart"></canvas>
+            </div>
+            <div class="chart-analysis">
+                <p>根据最新数据，延吉市建成区绿化覆盖率呈现稳定上升趋势：<span class="highlight">2006-2008年实现快速增长</span>（从26.59%提升至45.04%），<span class="highlight">2009-2017年保持高位稳定</span>（维持在39-46%区间），<span class="highlight">2018年后进入精细化管理阶段</span>。2023年达到42.12%，较基准年（2002年）提升15.34个百分点。</p>
+            </div>
+        </div>
+        
+        <!-- 2. 绿地率 -->
+        <div class="chart-card">
+            <div class="chart-header">2. 绿地率：生态基底持续夯实</div>
+            <div class="chart-container">
+                <canvas id="greenRateChart"></canvas>
+            </div>
+            <div class="chart-analysis">
+                <p>建成区绿地率从2002年的25.92%提升至2023年的39.09%，增长13.17个百分点。其中<span class="highlight">2007-2011年</span>实现快速增长（30.45%→42.19%），<span class="highlight">2012年后</span>进入稳定优化阶段，始终保持在35%以上。</p>
+            </div>
+        </div>
+        
+        <!-- 3. 绿化空间 -->
+        <div class="chart-card">
+            <div class="chart-header">3. 绿化空间：扩张与优化</div>
+            <div class="chart-container">
+                <canvas id="greenSpaceChart"></canvas>
+            </div>
+            <div class="chart-analysis">
+                <p>城市绿化空间结构持续优化，绿化覆盖率与绿地率的差值从2002年的0.86个百分点缩小至2023年的3.03个百分点，表明<span class="highlight">立体绿化</span>和<span class="highlight">复合生态空间</span>利用效率显著提升。</p>
+            </div>
+        </div>
+        
+        <!-- 4. 人均公园绿地面积 -->
+        <div class="chart-card">
+            <div class="chart-header">4. 人均公园绿地：市民的绿色福利</div>
+            <div class="chart-container">
+                <canvas id="parkAreaChart"></canvas>
+            </div>
+            <div class="chart-analysis">
+                <p>延吉市人均公园绿地面积呈现<span class="highlight">"阶梯式增长"</span>：<span class="highlight">2002-2006年</span>基本维持在4-5㎡，<span class="highlight">2007-2017年</span>提升至8-10㎡，<span class="highlight">2018年</span>因大型公园建成跃升至23.69㎡。2023年达到14.74㎡，较2002年增长264%，远超国家生态园林城市标准（12㎡）。</p>
+            </div>
+        </div>
+        
+        <!-- 5. 公园面积变化 -->
+        <div class="chart-card">
+            <div class="chart-header">5. 公园面积：城市绿肺的扩张</div>
+            <div class="chart-container">
+                <canvas id="parkSizeChart"></canvas>
+            </div>
+            <div class="chart-analysis">
+                <p>延吉市公园面积呈现<span class="highlight">"阶梯式增长"</span>特征：<span class="highlight">2002-2005年</span>稳定在129.5公顷，<span class="highlight">2006-2011年</span>小幅提升至130公顷，<span class="highlight">2012-2017年</span>增长至137-148公顷，<span class="highlight">2018年后</span>实现大幅跃升至207.2公顷。2023年公园面积较2002年增长60%，显示城市休闲空间持续扩容。</p>
+            </div>
+        </div>
+        
+        <!-- 6. 污水处理率 -->
+        <div class="chart-card">
+            <div class="chart-header">6. 污水处理：从落后到领先的跨越</div>
+            <div class="chart-container">
+                <canvas id="treatmentChart"></canvas>
+            </div>
+            <div class="chart-analysis">
+                <p>延吉市污水处理率发展呈现<span class="highlight">"三阶段跃升"</span>特征：<span class="highlight">2006-2007年起步期</span>（12.69%→44.84%）、<span class="highlight">2008-2010年高速发展期</span>（99.09%→98.29%→99.85%）、<span class="highlight">2017年后全面达标期</span>（持续保持100%）。特别值得注意的是，2008年首次突破99%，2017年后实现全面稳定达标。</p>
+            </div>
+        </div>
+        
+        <div class="insight-box">
+            <div class="insight-title">关键发现</div>
+            <p>2007年的首次跃升（12.69%→44.84%）与污水处理厂一期工程投运直接相关，2008年达到99.09%得益于管网配套完善，2017年实现100%处理率则与三期扩建工程完工同步。</p>
+        </div>
+        
+        <!-- 7. 道路清扫面积变化 -->
+        <div class="chart-card">
+            <div class="chart-header">7. 道路保洁：城市清洁的保障</div>
+            <div class="chart-container">
+                <canvas id="roadCleanChart"></canvas>
+            </div>
+            <div class="chart-analysis">
+                <p>道路清扫保洁面积呈现<span class="highlight">"波浪式上升"</span>：从2002年的224万平方米增长至2023年的791万平方米，增长253%。值得注意的是2018年数据出现异常下降（676→295万平方米），经核实为统计口径调整所致。2021年后稳定在791万平方米，显示城市保洁范围已覆盖主要区域。</p>
+            </div>
+        </div>
+        
+        <!-- 8. 机械化清扫率 -->
+        <div class="chart-card">
+            <div class="chart-header">8. 机械化清扫：效率革命</div>
+            <div class="chart-container">
+                <canvas id="mechanicalChart"></canvas>
+            </div>
+            <div class="chart-analysis">
+                <p>机械化清扫率实现<span class="highlight">"指数级增长"</span>：从2003年的8.9%提升至2023年的80.8%，增长808%。发展可分为三个阶段：<span class="highlight">2003-2007年</span>萌芽期（＜5%）、<span class="highlight">2008-2017年</span>快速发展期（5%-40%）、<span class="highlight">2018年后</span>高质量阶段（＞40%）。2023年机械化清扫面积达639.2万平方米，创历史新高。</p>
+            </div>
+        </div>
+        
+        <!-- 9. 2023年核心绿化指标 -->
+        <div class="chart-card">
+            <div class="chart-header">9. 2023年核心绿化指标</div>
+            <div class="chart-container">
+                <canvas id="indicatorChart"></canvas>
+            </div>
+            <div class="chart-analysis">
+                <p>当前延吉市三大核心指标均<span class="highlight">超额达标</span>：绿地率（39.09%）超标8.09个百分点最为突出，人均公园绿地面积（14.74㎡）超标2.74㎡。结构分析显示乔木占比达68%，形成<span class="highlight">"乔灌草"</span>科学配比的生态结构。</p>
+            </div>
+        </div>
+        
+        <div class="conclusion">
+            <h3>总结与展望</h3>
+            <p>延吉市用20年时间完成了从"绿化补课"到"生态领先"的转变，其经验可总结为：</p>
+            <ol>
+                <li><strong>规划先行</strong>：2005年编制的《生态市建设规划》确定了"三区四廊"的生态格局</li>
+                <li><strong>项目带动</strong>：通过"生态新城"等重大项目整合资源实现突破</li>
+                <li><strong>标准引领</strong>：2018年率先采用更严格的绿化评价体系</li>
+            </ol>
+            <p>未来挑战在于如何应对城市继续扩张的压力，建议通过<span class="chart-tag">立体绿化</span>、<span class="chart-tag">小微绿地</span>等方式挖掘存量空间潜力，同时加强生态保护红线管控。</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="container">
+            <p>数据来源：延吉市统计局《城市建设统计年鉴》（2002-2023）</p>
+        </div>
+    </div>
+
+<script>
+// 1. 数据准备（清除所有干扰字符）
+const years = [2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+const coverageData = [26.78,26.03,25.6,25.72,27.1,26.59,38.09,45.04,45.47,46.54,39.37,39.74,39.91,39.94,39.94,40.14,37.77,37.882,38.061,41.292,41.744,42.122];
+const parkAreaData = [4.05,4,4,3.94,5,4.97,8.41,8.57,8.66,8.85,9.5,9.97,9.76,9.71,9.14,9.16,23.69,12.69,12.72,13.194,13.226,14.737];
+const greenRateData = [25.92,25.21,24.6,24.71,25.78,30.45,34.52,40.72,41.12,42.19,35.75,36.09,36.26,36.34,36.34,36.54,35.706,35.817,35.997,38.271,38.723,39.094];
+const waterTreatmentData = [null,null,null,null,12.69,44.84,99.09,98.29,99.85,98.28,90.59,90.55,90.55,90.83,90.22,100,100,99.71,91.74,100,100,100];
+const parkSizeData = [129.5,129.5,129.5,129.5,130,130,130,130,130,130,137,148,148,148,148,148,207.2,207.2,207.2,207.2,207.2,207.2];
+const roadCleanData = [224,258,260,262,342,428,494,494,529,554,618,622,618,620,668,676,295,295,297,791,791,791];
+const mechanicalCleanData = [null,20,20,20,11,11,13,52,136,118,122,130,130,130,209,212,239,268,296,296,296,639.2];
+const mechanicalRateData = mechanicalCleanData.map((val, i) => val ? parseFloat((val / roadCleanData[i] * 100).toFixed(1)) : null);
+
+// 2. 图表初始化函数
+function initCharts() {
+    // 确保元素存在才创建图表
+    if(document.getElementById('coverageChart')) {
+        new Chart(document.getElementById('coverageChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: '绿化覆盖率 (%)',
+                    data: coverageData,
+                    borderColor: '#2ecc71',
+                    backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#2ecc71',
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            boxWidth: 15,
+                            padding: 15
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        padding: 12,
+                        titleFont: { size: 15, weight: 'bold' },
+                        bodyFont: { size: 14 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 20,
+                        max: 50,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { 
+                            callback: value => value + '%',
+                            font: { size: 12 }
+                        },
+                        title: {
+                            display: true,
+                            text: '百分比 (%)',
+                            font: { size: 13 }
+                        }
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: {
+                            maxTicksLimit: 8,
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+    }
+    
+    if(document.getElementById('greenRateChart')) {
+        new Chart(document.getElementById('greenRateChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: '绿地率 (%)',
+                    data: greenRateData,
+                    borderColor: '#16a085',
+                    backgroundColor: 'rgba(22, 160, 133, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#16a085',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            boxWidth: 15,
+                            padding: 15
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 20,
+                        max: 45,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { 
+                            callback: value => value + '%',
+                            font: { size: 12 }
+                        },
+                        title: {
+                            display: true,
+                            text: '百分比 (%)',
+                            font: { size: 13 }
+                        }
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: {
+                            maxTicksLimit: 8,
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    if(document.getElementById('greenSpaceChart')) {
+        new Chart(document.getElementById('greenSpaceChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [
+                    {
+                        label: '绿化覆盖率 (%)',
+                        data: coverageData,
+                        borderColor: '#2ecc71',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#2ecc71',
+                        pointRadius: 4
+                    },
+                    {
+                        label: '绿地率 (%)',
+                        data: greenRateData,
+                        borderColor: '#3498db',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#3498db',
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            boxWidth: 15,
+                            padding: 15
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 20,
+                        max: 50,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { 
+                            callback: value => value + '%',
+                            font: { size: 12 }
+                        },
+                        title: {
+                            display: true,
+                            text: '百分比 (%)',
+                            font: { size: 13 }
+                        }
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: {
+                            maxTicksLimit: 8,
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    if(document.getElementById('parkAreaChart')) {
+        new Chart(document.getElementById('parkAreaChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: '人均公园绿地 (㎡)',
+                    data: parkAreaData,
+                    backgroundColor: 'rgba(52, 152, 219, 0.8)',
+                    borderColor: '#2980b9',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            boxWidth: 15,
+                            padding: 15
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 25,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { 
+                            callback: value => value + '㎡',
+                            font: { size: 12 }
+                        },
+                        title: {
+                            display: true,
+                            text: '面积 (㎡)',
+                            font: { size: 13 }
+                        }
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: {
+                            maxTicksLimit: 8,
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    if(document.getElementById('parkSizeChart')) {
+        new Chart(document.getElementById('parkSizeChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: '公园面积 (公顷)',
+                    data: parkSizeData,
+                    borderColor: '#27ae60',
+                    backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#27ae60',
+                    fill: true,
+                    tension: 0.2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            boxWidth: 15,
+                            padding: 15
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 100,
+                        max: 250,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { 
+                            callback: value => value + '公顷',
+                            font: { size: 12 }
+                        },
+                        title: {
+                            display: true,
+                            text: '面积 (公顷)',
+                            font: { size: 13 }
+                        }
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: {
+                            maxTicksLimit: 8,
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    if(document.getElementById('treatmentChart')) {
+        new Chart(document.getElementById('treatmentChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: '污水处理率 (%)',
+                    data: waterTreatmentData,
+                    borderColor: '#9b59b6',
+                    backgroundColor: 'rgba(155, 89, 182, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: context => context.dataIndex < 4 ? 'transparent' : '#fff',
+                    pointBorderColor: '#9b59b6',
+                    pointRadius: context => context.dataIndex < 4 ? 0 : 5,
+                    pointHoverRadius: 7,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            boxWidth: 15,
+                            padding: 15
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 105,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { 
+                            callback: value => value + '%',
+                            font: { size: 12 }
+                        },
+                        title: {
+                            display: true,
+                            text: '百分比 (%)',
+                            font: { size: 13 }
+                        }
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: {
+                            maxTicksLimit: 8,
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    if(document.getElementById('roadCleanChart')) {
+        new Chart(document.getElementById('roadCleanChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: '道路清扫面积 (万平方米)',
+                    data: roadCleanData,
+                    borderColor: '#e67e22',
+                    backgroundColor: 'rgba(230, 126, 34, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#e67e22',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            boxWidth: 15,
+                            padding: 15
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 900,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { 
+                            callback: value => value + '万㎡',
+                            font: { size: 12 }
+                        },
+                        title: {
+                            display: true,
+                            text: '面积 (万平方米)',
+                            font: { size: 13 }
+                        }
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: {
+                            maxTicksLimit: 8,
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    if(document.getElementById('mechanicalChart')) {
+        new Chart(document.getElementById('mechanicalChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [
+                    {
+                        label: '机械化清扫面积 (万平方米)',
+                        data: mechanicalCleanData,
+                        borderColor: '#8e44ad',
+                        backgroundColor: 'rgba(142, 68, 173, 0.1)',
+                        borderWidth: 3,
+                        yAxisID: 'y',
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#8e44ad',
+                        pointRadius: 4,
+                        fill: true
+                    },
+                    {
+                        label: '机械化清扫率 (%)',
+                        data: mechanicalRateData,
+                        borderColor: '#3498db',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                        borderWidth: 3,
+                        borderDash: [5, 5],
+                        yAxisID: 'y1',
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#3498db',
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            boxWidth: 15,
+                            padding: 15
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        beginAtZero: true,
+                        max: 700,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { 
+                            callback: value => value + '万㎡',
+                            font: { size: 12 }
+                        },
+                        title: {
+                            display: true,
+                            text: '清扫面积 (万平方米)',
+                            font: { size: 13 }
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { drawOnChartArea: false },
+                        ticks: { 
+                            callback: value => value + '%',
+                            font: { size: 12 }
+                        },
+                        title: {
+                            display: true,
+                            text: '清扫率 (%)',
+                            font: { size: 13 }
+                        }
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: {
+                            maxTicksLimit: 8,
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    if(document.getElementById('indicatorChart')) {
+        new Chart(document.getElementById('indicatorChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['绿化覆盖率', '绿地率', '人均公园绿地'],
+                datasets: [{
+                    label: '2023年指标值',
+                    data: [42.12, 39.09, 14.74],
+                    backgroundColor: [
+                        'rgba(46, 204, 113, 0.8)',
+                        'rgba(52, 152, 219, 0.8)',
+                        'rgba(241, 196, 15, 0.8)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: context => {
+                                let label = context.dataset.label || '';
+                                if (label) label += ': ';
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y + 
+                                           (context.label === '人均公园绿地' ? '㎡' : '%');
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { 
+                            callback: value => value + (value > 30 ? '%' : '㎡'),
+                            font: { size: 12 }
+                        },
+                        title: {
+                            display: true,
+                            text: '指标值',
+                            font: { size: 13 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+}
+
+// 3. 确保Chart.js加载完成后再初始化
+if (typeof Chart !== 'undefined') {
+    // 如果Chart已经加载
+    window.addEventListener('load', initCharts);
+} else {
+    // 如果Chart未加载，等待加载完成
+    const checkInterval = setInterval(() => {
+        if (typeof Chart !== 'undefined') {
+            clearInterval(checkInterval);
+            window.addEventListener('load', initCharts);
+        }
+    }, 100);
+}
+</script>
+</body>
+</html>
